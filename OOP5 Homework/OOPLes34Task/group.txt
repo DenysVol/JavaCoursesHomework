@@ -1,0 +1,10 @@
+¹  1 Student [surname=Pikul, name=Vitaly, age=20, sex=male, nationality=russian, averageGradePoint=3.8]
+¹  2 Student [surname=Williams, name=Robin, age=22, sex=male, nationality=canadian, averageGradePoint=3.9]
+¹  3 Student [surname=Huston, name=Mary, age=20, sex=female, nationality=american, averageGradePoint=4.2]
+¹  4 Student [surname=Johnson, name=Carl, age=19, sex=male, nationality=englishman, averageGradePoint=4.3]
+¹  5 Student [surname=Bort, name=Roma, age=20, sex=male, nationality=ukrainian, averageGradePoint=4.5]
+¹  6 Student [surname=Bereh, name=Max, age=21, sex=male, nationality=ukrainian, averageGradePoint=4.6]
+¹  7 Student [surname=Dovgal, name=Dmitry, age=21, sex=male, nationality=ukrainian, averageGradePoint=4.7]
+¹  8 Student [surname=Ivanov, name=Victor, age=21, sex=male, nationality=ukrainian, averageGradePoint=4.9]
+¹  9 Student [surname=Shapran, name=Karina, age=22, sex=female, nationality=ukrainian, averageGradePoint=5.0]
+¹ 10 Empty
