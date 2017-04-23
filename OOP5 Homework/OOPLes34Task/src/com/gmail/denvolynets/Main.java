@@ -38,7 +38,7 @@ public class Main {
 			grRecruits.sortByParam("age");
 			grOne.sortByParam("averageGradePoint");
 			grOne.saveToFile("group.txt");
-			Group grNew = new Group(Group.readFromFile("group.txt"));
+			Group grNew = new Group(Group.readFromFile("group.csv"));
 			grNew.toString();
 			
 		} catch (FullGroupException e) {
