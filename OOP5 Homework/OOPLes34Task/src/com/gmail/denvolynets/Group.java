@@ -11,7 +11,7 @@ import java.util.regex.Matcher;
 import java.util.regex.Pattern;
 
 public class Group implements Voenkom {
-	public Student[] studentArray = new Student[10];
+	private Student[] studentArray = new Student[10];
 
 	public Group(Student[] studentArray) {
 		super();
@@ -66,7 +66,7 @@ public class Group implements Voenkom {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (CheckWithRegExpString(surname) == true) {
+		if (checkWithRegExpString(surname) == true) {
 			return surname;
 		} else {
 			throw new WrongInformationException();
@@ -81,7 +81,7 @@ public class Group implements Voenkom {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (CheckWithRegExpString(name) == true) {
+		if (checkWithRegExpString(name) == true) {
 			return name;
 		} else {
 			throw new WrongInformationException();
@@ -128,7 +128,7 @@ public class Group implements Voenkom {
 		} catch (IOException e) {
 			e.printStackTrace();
 		}
-		if (CheckWithRegExpString(nationality) == true) {
+		if (checkWithRegExpString(nationality) == true) {
 			return nationality;
 		} else {
 			throw new WrongInformationException();
@@ -145,21 +145,21 @@ public class Group implements Voenkom {
 		} catch (NumberFormatException e) {
 			throw new WrongInformationException();
 		}
-		if (averageGradePoint <= 5 && CheckWithRegExpDouble(averageGradePoint) == true) {
+		if (averageGradePoint <= 5 && checkWithRegExpDouble(averageGradePoint) == true) {
 			return averageGradePoint;
 		} else {
 			throw new WrongInformationException();
 		}
 	}
 
-	private boolean CheckWithRegExpDouble(double data) {
+	private boolean checkWithRegExpDouble(double data) {
 		String input = Double.toString(data);
 		Pattern p = Pattern.compile("^[0-9].+");
 		Matcher m = p.matcher(input);
 		return m.matches();
 	}
 
-	private boolean CheckWithRegExpString(String data) {
+	private boolean checkWithRegExpString(String data) {
 		Pattern p = Pattern.compile("^[A-z]+$");
 		Matcher m = p.matcher(data);
 		return m.matches();
@@ -289,19 +289,15 @@ public class Group implements Voenkom {
 		Student[] studentArray = new Student[10];
 		try (BufferedReader br = new BufferedReader(new FileReader(fileName))) {
 			String readStr = "";
-				for (int i = 0; i < studentArray.length; i++) {
-					for (; (readStr = br.readLine()) != null;) {
-					if (readStr.contains("Empty")) {
+			for (int i = 0; i < studentArray.length; i++) {
+				for (; (readStr = br.readLine()) != null;) {
+					if (!readStr.contains(",")) {
 						studentArray[i] = null;
 					} else {
-						String surname = readStr.substring(readStr.indexOf("surname=", 0) + 8, readStr.indexOf(",", 0));
-						String name = readStr.substring(readStr.indexOf(" name=", 0) + 6, readStr.indexOf(", age", 0));
-						int age = Integer.parseInt(readStr.substring(readStr.indexOf("age=", 0) + 4, readStr.indexOf(", sex", 0)));
-						String sexStr = readStr.substring(readStr.indexOf("sex=", 0) + 4, readStr.indexOf(", nationality", 0));
-						boolean sex = sexStr.equals("male") ? true : false;
-						String nationality = readStr.substring(readStr.indexOf("nationality=", 0) + 12, readStr.indexOf(", averageGradePoint", 0));
-						double averageGradePoint = Double.parseDouble(readStr.substring(readStr.indexOf("averageGradePoint=", 0) + 18, readStr.indexOf("]", 0)));
-						studentArray[i] = new Student(surname, name, age, sex, nationality, averageGradePoint);
+						String noWhiteSpaces = readStr.replaceAll(" ", "");
+						String[] values = noWhiteSpaces.split(",");
+						studentArray[i] = new Student(values[0], values[1], Integer.parseInt(values[2]),
+								values[3].equals("male") ? true : false, values[4], Double.parseDouble(values[5]));
 						break;
 					}
 				}
