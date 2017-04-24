@@ -6,6 +6,7 @@ import java.io.FileReader;
 import java.io.PrintWriter;
 
 public class FileOperations {
+
 	public static void combiner(File a, File b) {
 		if (a.isDirectory() || b.isDirectory()) {
 			throw new IllegalArgumentException("File is Directory");
@@ -19,11 +20,25 @@ public class FileOperations {
 				PrintWriter pw = new PrintWriter("c.txt")) {
 			String strOne = "";
 			String strTwo = "";
+			String TextOne = "";
+			String TextTwo = "";
+			String[] textArrayOne;
+			String[] textArrayTwo;
 			for (; (strOne = brOne.readLine()) != null;) {
-				pw.println(strOne);
+				TextOne += strOne.toLowerCase() + " ";
 			}
 			for (; (strTwo = brTwo.readLine()) != null;) {
-				pw.println(strTwo);
+				TextTwo += strTwo.toLowerCase() + " ";
+			}
+			textArrayOne = TextOne.split("\\. |\\, |\\!| |\\?|\\;|\\:|\\.|\\,");
+			textArrayTwo = TextTwo.split("\\. |\\, |\\!| |\\?|\\;|\\:|\\.|\\,");
+			for (String stringOne : textArrayOne) {
+				for (String stringTwo : textArrayTwo) {
+					if(stringOne.equals(stringTwo)){
+						pw.println(stringOne);
+						break;
+					}
+				}
 			}
 		} catch (Exception e) {
 			e.printStackTrace();
